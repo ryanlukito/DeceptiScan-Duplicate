@@ -65,10 +65,10 @@ bagaimana cara agar tidak tertipu pesan spam ataupun phising.
 Analisis Kompetitor:
 
 Kompetitor 1:
-![Tabel Analisis Kompetitor 1](image-3.png)
+![Tabel Analisis Kompetitor 1](kompetitor1.png)
 
 Kompetitor 2:
-![Tabel Aalisis Kompetitor 2](image-1.png)
+![Tabel Aalisis Kompetitor 2](kompetitor2.png)
 
 Kompetitor 3:
-![Tabel Aalisis Kompetitor 3](image-2.png)
+![Tabel Aalisis Kompetitor 3](kompetitor3.png)
