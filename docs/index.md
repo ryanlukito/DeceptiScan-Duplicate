@@ -1,3 +1,7 @@
+---
+layout: default
+title: DeceptiScan
+---
 B1_03
 
 Anggota 1 : Melvin Waluyo
