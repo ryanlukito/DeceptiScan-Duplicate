@@ -4,7 +4,7 @@ title: DeceptiScan
 ---
 B1_03
 
-Anggota 1 : Melvin Waluyo
+Anggota 1 : Melvin Waluyo - 22/492978/TK/53972
 
 Anggota 2 : Ryan Krishandi Lukito - 22/497249/TK/54488
 
