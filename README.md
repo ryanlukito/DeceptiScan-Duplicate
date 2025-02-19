@@ -1,6 +1,5 @@
-# Nama Produk Kelompok
-
-DeceptiScan
+# DeceptiScan
+## Web Spam and Phising Detector
 
 Kelompok B1_03
 
