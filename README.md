@@ -1,7 +1,7 @@
 # DeceptiScan
 ## Web Spam and Phising Detector
 
-Kelompok B1_03
+Senior Project TIF Kelompok B1_03
 
 Ketua kelompok : **Rizkita Alisha Ramadhani**
 
