@@ -90,5 +90,36 @@ DeceptiScan bertujuan untuk membantu pengguna dalam mengidentifikasi dan menghin
 ## Use Case Diagram
 
 Use Case Diagram:
-![Use Case](UseCase.png)
+![Use Case Diagram](UseCase.png)
+
+## Functional Requirement
+
+- Spam Checker : Fitur ini berfungsi untuk mengecek apakah teks yang diterima user tergolong spam atau tidak. User hanya perlu memasukkan teks ke dalam form input kemudian mengklik tombol “Check”. Nantinya akan keluar hasil pengecekan spam atau tidak spam.
+
+- Phising Checker : Fitur ini berfungsi untuk mengecek apakah teks dari email yang diterima user tergolong phising atau tidak. User hanya perlu memasukkan teks ke dalam form input kemudian mengklik tombol “Check”. Nantinya akan keluar hasil pengecekan apakah teks tergolong phising atau tidak phising.
+
+- Artikel Spam & Phising : Fitur ini berisikan artikel yang bisa dibaca user terkait cara mengenali teks spam serta phising. Selain itu terdapat juga tips-tips agar tidak mudah tertipu teks spam dan phising.
+
+## Entity Relationship Diagram
+
+![ERD Diagram](ERD.png)
+
+## Lo-Fi Wireframe
+
+Login Page: 
+![Login Page](LoginPage.png)
+
+Home Page:
+![Home Page](HomePage.png)
+
+Spam Checker:
+![Spam Checker](SpamCheck.png)
+
+Articles Page:
+![Articles Page](Articles.png)
+
+## Gann Chart
+
+![Gann Chart](GannChart.png)
+
 
