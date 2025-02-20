@@ -124,4 +124,4 @@ Articles Page:
 
 ## Gantt Chart
 
-![Gann Chart](GannChart.png)
+![Gantt Chart](GanttChart.png)
