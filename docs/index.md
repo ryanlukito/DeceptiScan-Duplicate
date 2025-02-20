@@ -66,13 +66,29 @@ apakah teks yang dimasukkan user tergolong spam atau tidak spam serta phising at
 tidak phising. Selain itu, web ini juga akan dilengkapi dengan artikel berita terkait
 bagaimana cara agar tidak tertipu pesan spam ataupun phising.
 
-## Analisis Kompetitor:
+## Analisis Kompetitor
 
 Kompetitor 1:
 ![Tabel Analisis Kompetitor 1](kompetitor1.png)
 
 Kompetitor 2:
-![Tabel Aalisis Kompetitor 2](kompetitor2.png)
+![Tabel Analisis Kompetitor 2](kompetitor2.png)
 
 Kompetitor 3:
-![Tabel Aalisis Kompetitor 3](kompetitor3.png)
+![Tabel Analisis Kompetitor 3](kompetitor3.png)
+
+## Tujuan
+
+DeceptiScan bertujuan untuk membantu pengguna dalam mengidentifikasi dan menghindari pesan spam serta phishing dengan cepat dan akurat menggunakan teknologi AI. Produk ini dirancang untuk meningkatkan kesadaran keamanan digital dengan menyediakan analisis otomatis terhadap teks yang mencurigakan serta memberikan edukasi mengenai cara mengenali ancaman siber. Dengan solusi yang mudah diakses dan informatif, DeceptiScan bertujuan untuk mengurangi risiko penipuan online dan melindungi data pribadi pengguna dari serangan phishing dan spam yang semakin berkembang.
+
+## Pengguna Potensial
+
+- User aktif platform Email
+
+- User aktif media sosial
+
+## Use Case Diagram
+
+Use Case Diagram:
+![Use Case](UseCase.png)
+
