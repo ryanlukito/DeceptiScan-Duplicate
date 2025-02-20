@@ -18,7 +18,7 @@ Nama Produk:
 **DeceptiScan**
 
 Jenis Produk:
-**Web-based Spam and Phising Classifer**
+**Web-based Spam and Phishing Classifer**
 
 ## Latar Belakang
 
@@ -43,7 +43,7 @@ membedakan antara email atau tautan yang sah dan yang berbahaya, menyebabkan
 mereka menjadi korban pencurian data dan serangan siber lainnya.
 Dari latar belakang tersebut ada beberapa permasalahan di masyarakat khususnya di
 dunia digital yang harus diselesaikan pada era sekarang ini. Permasalahan terkait
-banyaknya berita/email spam dan juga phising sering kali merugikan banyak orang. Untuk
+banyaknya berita/email spam dan juga phishing sering kali merugikan banyak orang. Untuk
 menemukan dan merancang solusi dari permasalahan tersebut dengan memanfaatkan
 teknologi, kita bisa menjabarkan rumusan permasalahannya terlebih dahulu sebagai
 berikut 
@@ -51,20 +51,20 @@ berikut
 ## Rumusan Masalah
 
 1. Bagaimana kita bisa membedakan email spam dan email yang sah?
-2. Bagaimana kita bisa membedakan email phising dan email yang valid?
+2. Bagaimana kita bisa membedakan email phishing dan email yang valid?
 3. Bagaimana memastikan sistem pendeteksi memiliki akurasi yang tinggi dan mampu
-   membantu pengguna untuk terhindar dari scam/phising?
+   membantu pengguna untuk terhindar dari scam/phishing?
 4. Bagaimana kita menampilkan hasil deteksi dari sistem yang dibuat secara informatif
    kepada pengguna?
 
 ## Solusi
 
 Solusi yang kelompok kami berikan adalah pengembangan website untuk pengecekan
-spam text dan email phising. Website bekerja dengan cara menerima input dari user
+spam text dan email phishing. Website bekerja dengan cara menerima input dari user
 berupa teks yang akan dicek validitasnya kemudian mengeluarkan hasil berupa indikasi
-apakah teks yang dimasukkan user tergolong spam atau tidak spam serta phising atau
-tidak phising. Selain itu, web ini juga akan dilengkapi dengan artikel berita terkait
-bagaimana cara agar tidak tertipu pesan spam ataupun phising.
+apakah teks yang dimasukkan user tergolong spam atau tidak spam serta phishing atau
+tidak phishing. Selain itu, web ini juga akan dilengkapi dengan artikel berita terkait
+bagaimana cara agar tidak tertipu pesan spam ataupun phishing.
 
 ## Analisis Kompetitor
 
@@ -96,9 +96,9 @@ Use Case Diagram:
 
 - Spam Checker : Fitur ini berfungsi untuk mengecek apakah teks yang diterima user tergolong spam atau tidak. User hanya perlu memasukkan teks ke dalam form input kemudian mengklik tombol “Check”. Nantinya akan keluar hasil pengecekan spam atau tidak spam.
 
-- Phising Checker : Fitur ini berfungsi untuk mengecek apakah teks dari email yang diterima user tergolong phising atau tidak. User hanya perlu memasukkan teks ke dalam form input kemudian mengklik tombol “Check”. Nantinya akan keluar hasil pengecekan apakah teks tergolong phising atau tidak phising.
+- phishing Checker : Fitur ini berfungsi untuk mengecek apakah teks dari email yang diterima user tergolong phishing atau tidak. User hanya perlu memasukkan teks ke dalam form input kemudian mengklik tombol “Check”. Nantinya akan keluar hasil pengecekan apakah teks tergolong phishing atau tidak phishing.
 
-- Artikel Spam & Phising : Fitur ini berisikan artikel yang bisa dibaca user terkait cara mengenali teks spam serta phising. Selain itu terdapat juga tips-tips agar tidak mudah tertipu teks spam dan phising.
+- Artikel Spam & phishing : Fitur ini berisikan artikel yang bisa dibaca user terkait cara mengenali teks spam serta phishing. Selain itu terdapat juga tips-tips agar tidak mudah tertipu teks spam dan phishing.
 
 ## Entity Relationship Diagram
 
