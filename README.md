@@ -1,5 +1,6 @@
 # DeceptiScan
-## Web Spam and Phising Detector
+
+## Web Spam and Phishing Detector
 
 Senior Project TIF Kelompok B1_03
 

@@ -2,6 +2,7 @@
 layout: default
 title: DeceptiScan
 ---
+
 # Team B1_03
 
 **Anggota 1** : Melvin Waluyo - 22/492978/TK/53972
@@ -10,9 +11,9 @@ title: DeceptiScan
 
 **Anggota 3** : Rizkita Alisha Ramadhani - 22/494942/TK/54347
 
-*Project Senior Project TI*
+_Project Senior Project TI_
 
-*Departemen Teknik Elektro dan Teknologi Informasi, Fakultas Teknik, Universitas Gadjah Mada*
+_Departemen Teknik Elektro dan Teknologi Informasi, Fakultas Teknik, Universitas Gadjah Mada_
 
 Nama Produk:
 **DeceptiScan**
@@ -46,7 +47,7 @@ dunia digital yang harus diselesaikan pada era sekarang ini. Permasalahan terkai
 banyaknya berita/email spam dan juga phishing sering kali merugikan banyak orang. Untuk
 menemukan dan merancang solusi dari permasalahan tersebut dengan memanfaatkan
 teknologi, kita bisa menjabarkan rumusan permasalahannya terlebih dahulu sebagai
-berikut 
+berikut
 
 ## Rumusan Masalah
 
@@ -96,9 +97,9 @@ Use Case Diagram:
 
 - Spam Checker : Fitur ini berfungsi untuk mengecek apakah teks yang diterima user tergolong spam atau tidak. User hanya perlu memasukkan teks ke dalam form input kemudian mengklik tombol “Check”. Nantinya akan keluar hasil pengecekan spam atau tidak spam.
 
-- phishing Checker : Fitur ini berfungsi untuk mengecek apakah teks dari email yang diterima user tergolong phishing atau tidak. User hanya perlu memasukkan teks ke dalam form input kemudian mengklik tombol “Check”. Nantinya akan keluar hasil pengecekan apakah teks tergolong phishing atau tidak phishing.
+- Phishing Checker : Fitur ini berfungsi untuk mengecek apakah teks dari email yang diterima user tergolong phishing atau tidak. User hanya perlu memasukkan teks ke dalam form input kemudian mengklik tombol “Check”. Nantinya akan keluar hasil pengecekan apakah teks tergolong phishing atau tidak phishing.
 
-- Artikel Spam & phishing : Fitur ini berisikan artikel yang bisa dibaca user terkait cara mengenali teks spam serta phishing. Selain itu terdapat juga tips-tips agar tidak mudah tertipu teks spam dan phishing.
+- Artikel Spam & Phishing : Fitur ini berisikan artikel yang bisa dibaca user terkait cara mengenali teks spam serta phishing. Selain itu terdapat juga tips-tips agar tidak mudah tertipu teks spam dan phishing.
 
 ## Entity Relationship Diagram
 
@@ -106,7 +107,7 @@ Use Case Diagram:
 
 ## Lo-Fi Wireframe
 
-Login Page: 
+Login Page:
 ![Login Page](LoginPage.png)
 
 Home Page:
@@ -115,11 +116,12 @@ Home Page:
 Spam Checker:
 ![Spam Checker](SpamCheck.png)
 
+Phishing Checker:
+![Phishing Checker](PhishingCheck.png)
+
 Articles Page:
 ![Articles Page](Articles.png)
 
-## Gann Chart
+## Gantt Chart
 
 ![Gann Chart](GannChart.png)
-
-
