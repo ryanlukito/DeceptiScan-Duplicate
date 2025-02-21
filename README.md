@@ -2,7 +2,7 @@
 
 ## Web Spam and Phishing Detector
 
-Senior Project TIF Kelompok B1_03
+Senior Project Teknologi Informasi Kelompok B1_03
 
 Ketua kelompok : **Rizkita Alisha Ramadhani**
 
