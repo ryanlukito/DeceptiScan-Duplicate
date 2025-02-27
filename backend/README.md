@@ -19,7 +19,7 @@ This is the backend server for the DeceptiScan project, a web-based platform for
 1. Create a virtual environment:
    ```bash
    python -m venv venv
-   source venv/Scripts/activate  # On Windows: venv\Scripts\activate
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 2. Install dependencies:
    ```bash
