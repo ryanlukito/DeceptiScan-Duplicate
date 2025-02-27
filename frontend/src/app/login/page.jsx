@@ -1,8 +1,12 @@
+'use client';
 import React from "react";
 import Navbar from "@/components/Navbar";
 import LoginCard from "@/components/LoginCard";
+import useAuthRedirect from "@/hooks/useAuthRedirect";
 
-export default function LoginPage () {
+export default function LoginPage() {
+  useAuthRedirect();
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-teal-700 via-white to-white">
       <Navbar />
@@ -16,4 +20,4 @@ export default function LoginPage () {
       </div>
     </div>
   );
-};
+}
