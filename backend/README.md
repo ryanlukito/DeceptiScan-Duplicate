@@ -1,6 +1,7 @@
 # DeceptiScan Backend
 
 This is the backend server for the DeceptiScan project, a web-based platform for detecting spam and phishing attempts.
+Built with [FastAPI](https://fastapi.tiangolo.com/)
 
 ## Features
 
