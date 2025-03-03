@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import Navbar from "@/components/Navbar";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -28,31 +28,51 @@ export default function Page() {
   };
 
   if (loading) {
-    return <Loading/>;
+    return <Loading />;
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-teal-700 via-white to-white">
+    <div className="min-h-screen bg-gradient-to-b from-teal-700 via-white to-white overflow-hidden">
       <Navbar />
-      <div className="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center">
+      <div className="container mx-auto px-6 py-3 flex flex-col md:flex-row items-center">
         <div className="md:w-1/2">
-          <img src="/Marketing.png" alt="Email Security" className="max-w-full" />
+          <img
+            src="/Marketing.png"
+            alt="Email Security"
+            className="w-[700px] h-[650px]"
+          />
         </div>
         <div className="md:w-1/2 text-center md:text-left">
-          <h1 className="text-4xl font-bold text-teal-800 mb-10 text-center">DeceptiScan</h1>
+          <h1 className="text-4xl font-bold text-teal-800 mb-10 text-center">
+            DeceptiScan
+          </h1>
           <p className="text-2xl text-gray-700 mb-20 text-center">
-            DeceptiScan is a web-based tool that helps you spot spam and phishing messages with ease. 
-            Just enter any text or email, and our system will analyze it to determine if it’s spam or a phishing attempt. 
-            Plus, we’ve got helpful articles to keep you informed on how to stay safe from online scams.
+            DeceptiScan is a web-based tool that helps you spot spam and
+            phishing messages with ease. Just enter any text or email, and our
+            system will analyze it to determine if it’s spam or a phishing
+            attempt. Plus, we’ve got helpful articles to keep you informed on
+            how to stay safe from online scams.
           </p>
           <p className="text-xl text-gray-700 font-semibold text-center">
             {isLoggedIn ? (
               <>
-                Already logged in, <button onClick={handleLogout} className="font-bold text-black underline hover:text-teal-700 cursor-pointer">Logout?</button>
+                Already logged in,{" "}
+                <button
+                  onClick={handleLogout}
+                  className="font-bold text-black underline hover:text-teal-700 cursor-pointer"
+                >
+                  Logout?
+                </button>
               </>
-            ) : ( 
+            ) : (
               <>
-                <a href="/login" className="font-bold text-black underline mr-1 hover:text-teal-700">Login Here</a> if you’re Admin
+                <a
+                  href="/login"
+                  className="font-bold text-black underline mr-1 hover:text-teal-700"
+                >
+                  Login Here
+                </a>{" "}
+                if you’re Admin
               </>
             )}
           </p>
