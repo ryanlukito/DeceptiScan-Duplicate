@@ -46,9 +46,9 @@ DeceptiScan is a web-based application designed to detect spam and phishing text
 - Scikit-learn (for SVM model)
 - Uvicorn (for server deployment)
 
-### Database (if applicable):
+### Database:
 
-- MongoDB / PostgreSQL (optional for logging detected spam/phishing cases)
+- PostgreSQL
 
 ---
 
