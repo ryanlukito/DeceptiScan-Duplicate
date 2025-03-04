@@ -7,10 +7,10 @@ const PhisingCheck = () => {
     <div className="min-h-screen bg-gradient-to-b from-teal-700 via-white to-white relative">
       <Navbar />
       <div className="px-4">
-        <h1 className="text-[45px] font-poppins">
+        <h1 className="text-[45px] font-poppins mt-[2vw]">
           Check for phishing text messages here!
         </h1>
-        <form action="" className="flex flex-col">
+        <form action="" className="flex flex-col mt-[2vw]">
           <textarea
             type="text"
             className="w-[1000px] h-[400px] bg-[#DEF4F6] rounded-[5px] mt-3 text-black px-3 py-2"
