@@ -11,11 +11,6 @@ const PhisingCheck = () => {
           Check for phishing text messages here!
         </h1>
         <form action="" className="flex flex-col">
-          <input
-            type="text"
-            className="w-[1000px] h-[80px] bg-[#DEF4F6] rounded-[5px] text-black px-3"
-            placeholder="Paste the sender"
-          />
           <textarea
             type="text"
             className="w-[1000px] h-[400px] bg-[#DEF4F6] rounded-[5px] mt-3 text-black px-3 py-2"
