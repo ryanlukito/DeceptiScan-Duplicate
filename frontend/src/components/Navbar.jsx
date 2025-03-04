@@ -1,7 +1,19 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const pages = [
+  { href: "/", label: "Home" },
+  { href: "/SpamCheck", label: "Spam Check" },
+  { href: "/PhishingCheck", label: "Phishing Check" },
+  { href: "/Articles", label: "Articles" },
+];
 
 const Navbar = () => {
+  const pathName = usePathname();
+
   return (
     <nav className="bg-gradient-to-b from-teal-700 to-transparent p-4 text-white flex items-center justify-between">
       <div className="flex items-center space-x-4">
@@ -13,18 +25,17 @@ const Navbar = () => {
         </div>
       </div>
       <div className="flex space-x-6 text-lg font-semibold">
-        <Link href="/" className="hover:underline">
-          Home
-        </Link>
-        <Link href="/SpamCheck" className="hover:underline">
-          Spam Check
-        </Link>
-        <Link href="/PhishingCheck" className="hover:underline">
-          Phishing Check
-        </Link>
-        <Link href="/Articles" className="hover:underline">
-          Articles
-        </Link>
+        {pages.map((page, index) => (
+          <Link
+            key={index}
+            href={page.href}
+            className={`hover:underline ${
+              pathName === page.href ? "underline" : ""
+            }`}
+          >
+            {page.label}
+          </Link>
+        ))}
       </div>
     </nav>
   );
