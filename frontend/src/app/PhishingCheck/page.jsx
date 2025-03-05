@@ -1,8 +1,31 @@
+"use client";
+
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
+import { useState } from "react";
 
 const PhisingCheck = () => {
+  const [text, setText] = useState("");
+  const [result, setResult] = useState(null);
+
+  const model_url = process.env.NEXT_PUBLIC_MODEL_URL;
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await fetch(`${model_url}/predict_phishing`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text }),
+    });
+
+    const data = await response.json();
+    setResult(data);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-teal-700 via-white to-white relative">
       <Navbar />
@@ -10,8 +33,10 @@ const PhisingCheck = () => {
         <h1 className="text-[45px] font-poppins mt-[2vw]">
           Check for phishing text messages here!
         </h1>
-        <form action="" className="flex flex-col mt-[2vw]">
+        <form onSubmit={handleSubmit} className="flex flex-col mt-[2vw]">
           <textarea
+            value={text}
+            onChange={(e) => setText(e.target.value)}
             type="text"
             className="w-[1000px] h-[400px] bg-[#DEF4F6] rounded-[5px] mt-3 text-black px-3 py-2"
             placeholder="Paste the text message you got"
@@ -23,6 +48,14 @@ const PhisingCheck = () => {
             Check
           </button>
         </form>
+        {result && (
+          <div className="mt-4 p-3 bg-gray-200 rounded text-black">
+            <h3 className="font-bold">Prediction Result:</h3>
+            <p>{result.prediction}</p>
+            <h4 className="font-bold mt-2">Details:</h4>
+            <pre>{JSON.stringify(result.details, null, 2)}</pre>
+          </div>
+        )}
       </div>
       <Image
         src="/CyberShield.png"
