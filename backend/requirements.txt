@@ -62,3 +62,9 @@ typing-extensions==4.12.2
     #   pydantic
     #   pydantic-core
     #   sqlalchemy
+uvicorn==0.34.0
+psycopg2-binary==2.9.10
+python-multipart==0.0.20
+scikit-learn==1.6.1
+scipy==1.15.2
+numpy==2.2.3
