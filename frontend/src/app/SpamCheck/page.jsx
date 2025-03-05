@@ -9,12 +9,10 @@ const SpamCheck = () => {
   const [text, setText] = useState("");
   const [result, setResult] = useState(null);
 
-  const model_url = process.env.NEXT_PUBLIC_MODEL_URL;
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const response = await fetch(`${model_url}/predict_spam`, {
+    const response = await fetch("/api/predict/predict_spam", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
