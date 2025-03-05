@@ -7,7 +7,7 @@ dotenv.config()
 export const POST = async (req) => {
   const authData = await req.json()
   try{
-    const res = await axios.post(`${process.env.BACKEND_HOST}/auth/login`,
+    const res = await axios.post(`${process.env.BACKEND_HOST}/api/auth/login`,
       `username=${authData.username}&password=${authData.password}`,
       {
         timeout: 10000,
