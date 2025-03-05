@@ -20,8 +20,9 @@ def predict_spam(request: TextRequest):
     
     text_vectorized = vectorizer_spam.transform([request.text])
     prediction = model_spam.predict(text_vectorized)
+    prediction_proba = model_spam.predict_proba(text_vectorized)
     result = "Spam" if round(prediction[0]) == 1 else "Not Spam"
-    return {"prediction": result, "details": prediction.tolist()}
+    return {"prediction": result, "details": prediction_proba.tolist()}
 
 @predict_router.post("/predict_phishing")
 def predict_phishing(request: TextRequest):
@@ -31,4 +32,5 @@ def predict_phishing(request: TextRequest):
     text_vectorized = vectorizer_phishing.transform([request.text])
     prediction = model_phishing.predict(text_vectorized)
     result = "Phishing" if prediction[0] == 1 else "Not Phishing"
-    return {"prediction": result, "details": prediction.tolist()}
+    prediction_proba = model_phishing.predict_proba(text_vectorized)
+    return {"prediction": result, "details": prediction_proba.tolist()}
