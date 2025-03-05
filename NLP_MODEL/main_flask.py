@@ -4,9 +4,9 @@ import joblib
 app = Flask(__name__)
 
 model_spam = joblib.load("ml_model/svm_model_spam.joblib")
-vectorizer_spam = joblib.load("")
+vectorizer_spam = joblib.load("ml_model/svm_vectorizer_spam.joblib")
 model_phishing = joblib.load("ml_model/svm_model_phishing.joblib")
-vectorizer_phishing = joblib.load("")
+vectorizer_phishing = joblib.load("ml_model/svm_vectorizer_phishing.joblib")
 
 @app.route("/predict_spam", methods=["POST"])
 def predict_spam():
@@ -20,7 +20,7 @@ def predict_spam():
 
     prediction = model_spam.predict(text_vectorized)
 
-    result = "Spam" if prediction[0] == 1 else "Not Spam"
+    result = "Spam" if round(prediction[0]) == 1 else "Not Spam"
 
     return jsonify({"prediction": result})
 
