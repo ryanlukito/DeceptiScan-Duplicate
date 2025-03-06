@@ -3,10 +3,10 @@ from pydantic import BaseModel
 import joblib
 
 # Load models and vectorizers
-model_spam = joblib.load("../NLP_MODEL/ml_model/svm_model_spam.joblib")
-vectorizer_spam = joblib.load("../NLP_MODEL/ml_model/svm_vectorizer_spam.joblib")
-model_phishing = joblib.load("../NLP_MODEL/ml_model/svm_model_phishing.joblib")
-vectorizer_phishing = joblib.load("../NLP_MODEL/ml_model/svm_vectorizer_phishing.joblib")
+model_spam = joblib.load("./ml_model/svm_model_spam.joblib")
+vectorizer_spam = joblib.load("./ml_model/svm_vectorizer_spam.joblib")
+model_phishing = joblib.load("./ml_model/svm_model_phishing.joblib")
+vectorizer_phishing = joblib.load("./ml_model/svm_vectorizer_phishing.joblib")
 
 class TextRequest(BaseModel):
     text: str
