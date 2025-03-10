@@ -2,7 +2,7 @@ from fastapi import FastAPI, status, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from app.dto.base_response import HealthCheckModel
 from app.dto import HealthCheckResponseModel, DbTestResponseModel
-from app.routes import auth_router, admin_router, predict_router
+from app.routes import auth_router, admin_router, predict_router, feedback_router
 from dotenv import load_dotenv
 from app.db import get_db
 from sqlalchemy.orm import Session
@@ -60,3 +60,4 @@ async def test_db(db: Session = Depends(get_db)):
 app.include_router(auth_router, prefix="/api/auth")
 app.include_router(admin_router, prefix="/api/admin")
 app.include_router(predict_router, prefix="/api/predict")
+app.include_router(feedback_router, prefix="/api/feedback")

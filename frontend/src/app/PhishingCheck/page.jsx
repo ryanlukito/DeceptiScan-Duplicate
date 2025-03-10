@@ -1,16 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Image from "next/image";
-import { useState } from "react";
 
 const PhisingCheck = () => {
   const [text, setText] = useState("");
   const [result, setResult] = useState(null);
+  const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFeedbackSubmitted(false); // Reset feedbackSubmitted state
 
     const response = await fetch("/api/predict/predict_phishing", {
       method: "POST",
@@ -22,6 +23,24 @@ const PhisingCheck = () => {
 
     const data = await response.json();
     setResult(data);
+  };
+
+  const handleFeedback = async (review) => {
+    const response = await fetch("/api/feedback/phishing_feedback", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ phishingresultID: result.phishingresultID, review }),
+    });
+
+    const responseData = await response.json();
+
+    if (response.ok) {
+      setFeedbackSubmitted(true);
+    } else {
+      console.error("Failed to submit feedback", response.status, responseData);
+    }
   };
 
   return (
@@ -52,6 +71,26 @@ const PhisingCheck = () => {
             <p>{result.prediction}</p>
             <h4 className="font-bold mt-2">Details:</h4>
             <pre>{JSON.stringify(result.details, null, 2)}</pre>
+            <div className="flex space-x-4 mt-4">
+              {!feedbackSubmitted ? (
+                <>
+                  <button
+                    className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-700 hover:transition ease-in"
+                    onClick={() => handleFeedback("right")}
+                  >
+                    I think the AI is right 👍
+                  </button>
+                  <button
+                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-700 hover:transition ease-in"
+                    onClick={() => handleFeedback("wrong")}
+                  >
+                    I think the AI is wrong 👎
+                  </button>
+                </>
+              ) : (
+                <p>Thank you for your feedback</p>
+              )}
+            </div>
           </div>
         )}
       </div>
