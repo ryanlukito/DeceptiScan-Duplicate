@@ -1,6 +1,11 @@
-import React from "react";
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
+import { getCookie } from "@/utils/cookies";
 import Image from "next/image";
+import { FaPlus } from "react-icons/fa6";
+import { IoMdCloseCircleOutline } from "react-icons/io";
 
 const articles = [
   {
@@ -54,6 +59,17 @@ const articles = [
 ];
 
 const Articles = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isClick, setIsClick] = useState(false);
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      const token = await getCookie("TOKEN");
+      setIsLoggedIn(!!token);
+    };
+    checkLoginStatus();
+  }, []);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-teal-700 via-white to-white">
       <Navbar />
@@ -85,6 +101,26 @@ const Articles = () => {
             </div>
           </div>
         ))}
+        {isLoggedIn && (
+          <button
+            onClick={() => setIsClick(true)}
+            className="w-[4.583vw] h-[4.583vw] rounded-full font-bold bg-[#1A929A] hover:bg-[#166E74] active:bg-[#124D53] transition ease-in duration-100 flex items-center justify-center"
+          >
+            <FaPlus className="text-[3vw]" />
+          </button>
+        )}
+        {isClick && (
+          <div className="fixed inset-0 flex justify-center items-center bg-[rgba(0,0,0,0.85)] z-10">
+            <div className="w-[75vw] h-[44.271vw] bg-white p-[3vw] flex items-center justify-evenly text-black relative">
+              <button
+                onClick={() => setIsClick(false)}
+                className="absolute right-[1vw] top-[1vw]"
+              >
+                <IoMdCloseCircleOutline className="text-[3vw] text-red-600 hover:text-red-700 active:text-red-800" />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
