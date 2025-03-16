@@ -7,7 +7,7 @@ export const POST = async (req) => {
   const adminData = await req.json()
   
   try {
-    const res = await fetch(`${process.env.BACKEND_HOST}/api/admin`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/admin`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(adminData)

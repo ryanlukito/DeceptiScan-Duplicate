@@ -5,7 +5,7 @@ dotenv.config();
 
 export const POST = async (req) => {
   const { spamresultID, review } = await req.json();
-  const backend_url = process.env.BACKEND_HOST;
+  const backend_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   try {
     const response = await fetch(`${backend_url}/api/feedback/submit_spam_feedback`, {
