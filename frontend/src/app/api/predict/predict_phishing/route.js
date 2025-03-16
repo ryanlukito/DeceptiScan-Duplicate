@@ -5,7 +5,7 @@ dotenv.config();
 
 export const POST = async (req) => {
   const { text } = await req.json();
-  const model_url = process.env.BACKEND_HOST;
+  const model_url = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   try {
     const response = await fetch(`${model_url}/api/predict/predict_phishing`, {
