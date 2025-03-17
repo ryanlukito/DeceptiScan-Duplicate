@@ -7,8 +7,8 @@ const Checker = ({ predict_api, feedback_api, title, resultId }) => {
   const [result, setResult] = useState(null);
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setFeedbackSubmitted(false); // Reset feedbackSubmitted state
 
     const response = await fetch(`/api/predict/${predict_api}`, {

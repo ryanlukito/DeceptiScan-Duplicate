@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import React, { useState } from "react";
 import Button from "./Button";
 import { useRouter } from "next/navigation";
@@ -10,11 +10,11 @@ const LoginCard = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     setIsLoading(true);
     setError("");
-    
+
     try {
       const response = await fetch("/api/auth", {
         method: "POST",
@@ -23,12 +23,12 @@ const LoginCard = () => {
         },
         body: JSON.stringify({ username, password }),
       });
-      
+
       if (!response.ok) {
         const data = await response.json();
         throw new Error(data.detail || "Login failed");
       }
-      
+
       // Successful login - redirect to admin dashboard
       router.push("/");
     } catch (error) {
@@ -46,23 +46,27 @@ const LoginCard = () => {
       </div>
       {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
       <form className="space-y-4" onSubmit={handleSubmit}>
-        <input 
-          type="text" 
-          placeholder="Username" 
-          required 
-          className="w-full border-b-2 p-2 text-gray-700 outline-none" 
+        <input
+          type="text"
+          placeholder="Username"
+          required
+          className="w-full border-b-2 p-2 text-gray-700 outline-none"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        <input 
-          type="password" 
-          placeholder="Password" 
-          required 
-          className="w-full border-b-2 p-2 text-gray-700 outline-none" 
+        <input
+          type="password"
+          placeholder="Password"
+          required
+          className="w-full border-b-2 p-2 text-gray-700 outline-none"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button type="submit" disabled={isLoading} className="hover:cursor-pointer">
+        <Button
+          type="submit"
+          disabled={isLoading}
+          className="hover:cursor-pointer"
+        >
           {isLoading ? "Logging in..." : "Login"}
         </Button>
       </form>
