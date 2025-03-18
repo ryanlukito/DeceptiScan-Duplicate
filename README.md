@@ -64,7 +64,7 @@ Ensure you have the following installed:
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-repo/deceptiscan.git
+git clone https://github.com/alisharizkita/deceptiscan.git
 cd deceptiscan
 ```
 
