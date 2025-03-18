@@ -16,11 +16,7 @@ const ArticleCard = ({ article }) => {
         <p className="text-[0.625vw] text-justify">
           {article.text}
           <a
-            href={
-              article.link.startsWith("https:")
-                ? article.link
-                :` https://${article.link}`
-            }
+            href={article.link}
             target="_blank"
             className="text-blue-600 ml-[0.3vw]"
           >
