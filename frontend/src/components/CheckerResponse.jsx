@@ -4,9 +4,9 @@ const CheckerResponse = ({ result, feedbackSubmitted, handleFeedback }) => {
   return (
     <div className="w-[55.885vw] h-[12.812vw] flex flex-col items-start justify-center text-black mt-[1vw]">
       <div className="w-full h-[6.094vw] border border-black rounded-[0.26vw] p-[1vw] shadow-lg">
-        <h1 className="text-[1.25vw] italic">
+        <div className="text-[1.25vw] italic">
           <h1>
-            Your message has been identified as
+            Your message has been identified as{" "}
             {result.details[0][1] > 0.5
               ? `${parseFloat((result.details[0][1] * 100).toFixed(2))}% ${
                   result.prediction
@@ -17,7 +17,7 @@ const CheckerResponse = ({ result, feedbackSubmitted, handleFeedback }) => {
             {`\u00A0`}
             based on our AI Analysis
           </h1>
-        </h1>
+        </div>
       </div>
       <h1 className="text-[1.25vw] mt-[0.5vw]">
         Do you think that our DeceptiScan AI gave you the correct answer?
