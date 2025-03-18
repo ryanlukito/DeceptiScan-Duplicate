@@ -7,19 +7,12 @@ import { FaPlus } from "react-icons/fa6";
 import InputArticle from "@/components/InputArticle";
 import ArticleCard from "@/components/ArticleCard";
 
-const initialArticles = [
-  {
-    photo: "/stock.jpg",
-    title: "Tes Artikel",
-    text: "Mungkin setiap dari kita pernah menerima email dengan konten yang aneh. Jika Anda membaca teks ini, Anda adalah pengguna internet dan mungkin memiliki akun email. Meskipun spam email telah ada sejak awal email...",
-    link: "https://www.google.com",
-  },
-];
-
 const Articles = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isClick, setIsClick] = useState(false);
-  const [article, setArticle] = useState(initialArticles);
+  const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -27,48 +20,139 @@ const Articles = () => {
       setIsLoggedIn(!!token);
     };
 
-    // GET Data dari Database
-    // const fetchData = async () => {
-    //     try {
-    //       const response = await fetch("api get data");
-    //       if (!response.ok) {
-    //         throw new Error("Network response was not ok");
-    //       }
-    //       const result = response.json();
-    //       setArticle(result);
-    //     } catch (error) {
-    //       console.error("Error fetching data:", error);
-    //     }
-    //   };
-    //   fetchData();
+    const fetchArticles = async () => {
+      setIsLoading(true);
+      try {
+        // Use our API route instead of directly calling the backend
+        const response = await fetch('/api/article');
+        
+        if (!response.ok) {
+          throw new Error(`Failed to fetch articles: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        // Transform backend data format to match frontend components
+        const formattedArticles = data.map(article => ({
+          photo: article.imageLink || "/stock.jpg",
+          title: article.title,
+          text: article.summary,
+          link: article.link || "#",
+        }));
+        
+        setArticles(formattedArticles);
+      } catch (err) {
+        console.error("Error fetching articles:", err);
+        setError("Failed to load articles. Please try again later.");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     checkLoginStatus();
+    fetchArticles();
   }, []);
 
-  const handleAddArticle = (newArticle) => {
-    setArticle([...article, newArticle]);
-    setIsClick(false);
+  const handleAddArticle = async (newArticle) => {
+    try {
+      // Get admin ID from token
+      const token = await getCookie("TOKEN");
+      
+      if (!token) {
+        throw new Error("User not authenticated");
+      }
+  
+      // Get admin ID and ensure it's parsed as an integer
+      const adminIdStr = await getCookie("ADMIN_ID");
+      console.log("Admin ID from cookie:", adminIdStr); // Debug log
+      
+      // Use a default admin ID if not found in cookies
+      let adminID;
+      
+      if (adminIdStr && !isNaN(parseInt(adminIdStr, 10))) {
+        adminID = parseInt(adminIdStr, 10);
+      } else {
+        console.warn("No valid admin ID found in cookies, using default ID 1");
+        adminID = 1; // Default admin ID as fallback
+      }
+      
+      // Ensure an image URL is provided
+      if (!newArticle.photo) {
+        throw new Error("An image is required for the article");
+      }
+      
+      // Prepare article data for backend
+      const articleData = {
+        adminID: adminID,
+        title: newArticle.title, 
+        summary: newArticle.text,
+        link: newArticle.link || "",
+        imageLink: newArticle.photo
+      };
+      
+      console.log('Submitting article with data:', articleData);
+      
+      // Send JSON directly
+      const response = await fetch('/api/article', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(articleData)
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(`Failed to add article: ${response.status} - ${JSON.stringify(errorData)}`);
+      }
+      
+      const savedArticle = await response.json();
+      
+      setArticles([...articles, {
+        photo: savedArticle.imageLink || "/stock.jpg",
+        title: savedArticle.title,
+        text: savedArticle.summary,
+        link: savedArticle.link
+      }]);
+      
+      setIsClick(false);
+    } catch (err) {
+      console.error("Error adding article:", err);
+      alert(err.message || "Failed to add article. Please try again.");
+    }
   };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-teal-700 via-white to-white">
       <Navbar />
       <div className="p-[4vw] grid grid-cols-4 gap-y-[2vw]">
-        {article.map((article, index) => (
-          <ArticleCard article={article} key={index}></ArticleCard>
-        ))}
+        {isLoading ? (
+          <div className="col-span-4 text-center py-8">Loading articles...</div>
+        ) : error ? (
+          <div className="col-span-4 text-center text-red-500 py-8">{error}</div>
+        ) : articles.length === 0 ? (
+          <div className="col-span-4 text-center py-8">No articles found.</div>
+        ) : (
+          articles.map((article, index) => (
+            <ArticleCard article={article} key={index} />
+          ))
+        )}
+        
         {isLoggedIn && (
           <button
             onClick={() => setIsClick(true)}
-            className="w-[4.583vw] h-[4.583vw] rounded-full font-bold bg-[#1A929A] hover:bg-[#166E74] active:bg-[#124D53] transition ease-in duration-100 flex items-center justify-center"
+            className="w-[4.583vw] h-[4.583vw] rounded-full font-bold bg-[#1A929A] hover:bg-[#166E74] active:bg-[#124D53] transition ease-in duration-100 flex items-center justify-center fixed bottom-8 right-8"
           >
             <FaPlus className="text-[3vw]" />
           </button>
         )}
+        
         {isClick && (
           <InputArticle
             onClose={() => setIsClick(false)}
             onSubmit={handleAddArticle}
-          ></InputArticle>
+          />
         )}
       </div>
     </div>

@@ -11,5 +11,6 @@ class Article(Base):
     title = Column(String(255), nullable=False)
     summary = Column(Text)
     link = Column(String(255))
+    imageLink = Column(String(255))
     
     admin = relationship("Admin", back_populates="articles")

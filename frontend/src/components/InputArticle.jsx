@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import Image from "next/image";
 
@@ -9,45 +9,117 @@ const InputArticle = ({ onClose, onSubmit }) => {
   const [link, setLink] = useState("");
   const [preview, setPreview] = useState("");
   const [image, setImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState("/stock.jpg");
+  const [imagePreview, setImagePreview] = useState("/uploadImage.png");
+  const [isUploading, setIsUploading] = useState(false);
+  const [uploadError, setUploadError] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const fileInputRef = useRef(null);
 
-  const handleImageUpload = (event) => {
+  const uploadImage = async (file) => {
+    if (!file) return;
+    
+    // Reset previous errors
+    setUploadError(null);
+    
+    // Create a local preview immediately
+    const localPreview = URL.createObjectURL(file);
+    setImagePreview(localPreview);
+    setImage(file);
+    
+    // Upload to server
+    try {
+      setIsUploading(true);
+      const formData = new FormData();
+      formData.append('image', file);
+      
+      console.log('Uploading image...', file.name);
+      
+      const response = await fetch('/api/article/upload-image', {
+        method: 'POST',
+        body: formData,
+      });
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Upload failed:', response.status, errorText);
+        setUploadError(`Upload failed: ${response.status}`);
+        return;
+      }
+      
+      const data = await response.json();
+      
+      if (data.imageUrl) {
+        console.log('Image uploaded successfully:', data.imageUrl);
+        setImagePreview(data.imageUrl);
+      } else {
+        console.error('Invalid response format:', data);
+        setUploadError('Invalid response from server');
+      }
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      setUploadError(`Upload error: ${error.message}`);
+    } finally {
+      setIsUploading(false);
+    }
+  };
+
+  const handleImageUpload = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      setImage(file);
-      setImagePreview(URL.createObjectURL(file));
+      await uploadImage(file);
+    }
+  };
+
+  const handleDragEnter = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(true);
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!isDragging) setIsDragging(true);
+  };
+
+  const handleDragLeave = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+  };
+
+  const handleDrop = async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsDragging(false);
+    
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+      const file = e.dataTransfer.files[0];
+      // Check if file is an image
+      if (file.type.startsWith('image/')) {
+        await uploadImage(file);
+      } else {
+        setUploadError('Please upload only image files (PNG, JPG, JPEG)');
+      }
     }
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    
+    if (isUploading) {
+      alert("Please wait for the image to finish uploading.");
+      return;
+    }
 
     const newArticle = {
-      photo: "/stock.jpg",
+      photo: imagePreview !== "/uploadImage.png" ? imagePreview : "", // Don't use the default image
       title,
       text: preview,
-      link,
+      link: link.startsWith("http") ? link : `https://${link}`,
     };
 
     onSubmit(newArticle);
-
-    // POST Data ke Database
-    // try {
-    //   const response = await fetch("nanti apinya di sini", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify(formData),
-    //   });
-
-    //   if (response.ok) {
-    //     alert("Article saved successfully!");
-    //     onClose();
-    //   } else {
-    //     alert("Failed to save article!");
-    //   }
-    // } catch (error) {
-    //   console.error("Error submitting form:", error);
-    // }
   };
 
   return (
@@ -97,26 +169,45 @@ const InputArticle = ({ onClose, onSubmit }) => {
           <div className="mt-[2vw] flex">
             <label className="text-[1.25vw]">Picture*</label>
             <div className="flex items-center justify-between ml-[3.8vw]">
-              <Image
-                src="/uploadImage.png"
-                width={10000}
-                height={10000}
-                alt="camera"
-                className="w-[7.708vw] h-[6.927vw]"
-              />
+              <div className="relative w-[7.708vw] h-[6.927vw]">
+                <Image
+                  src={imagePreview}
+                  width={148}
+                  height={133}
+                  alt="article preview"
+                  className="w-[7.708vw] h-[6.927vw] object-cover"
+                  priority
+                />
+              </div>
               <input
                 type="file"
                 accept="image/*"
                 className="hidden"
                 id="image-upload"
                 onChange={handleImageUpload}
+                disabled={isUploading}
+                ref={fileInputRef}
               />
               <label
                 htmlFor="image-upload"
-                className="w-[30vw] h-[6.927vw] px-[1vw] py-[0.2vw] rounded-[0.52vw] border-1 border-black ml-[6.8vw] flex items-center justify-center hover:cursor-pointer"
+                className={`w-[35vw] h-[6.927vw] px-[1vw] py-[0.2vw] rounded-[0.52vw] border-1 border-black ml-[1.8vw] flex items-center justify-center hover:cursor-pointer ${isDragging ? 'bg-gray-100 border-dashed' : ''} ${isUploading ? 'opacity-50' : ''}`}
+                onDragEnter={handleDragEnter}
+                onDragOver={handleDragOver}
+                onDragLeave={handleDragLeave}
+                onDrop={handleDrop}
               >
-                <span className="text-[#146D74] mr-[0.4vw]">Click</span>to
-                upload JPG or JPEG
+                {isUploading ? (
+                  "Uploading image..."
+                ) : uploadError ? (
+                  <span className="text-red-500">{uploadError}</span>
+                ) : (
+                  <div className="text-center">
+                    <span className="text-[#146D74] mr-[0.4vw] font-medium">Click to upload</span>
+                    <span className="mr-[0.4vw]">or drag and drop</span>
+                    <br />
+                    <span className="text-sm text-gray-500">PNG, JPG, or JPEG</span>
+                  </div>
+                )}
               </label>
             </div>
           </div>
@@ -124,8 +215,9 @@ const InputArticle = ({ onClose, onSubmit }) => {
             <button
               type="submit"
               className="w-[7.865vw] h-[2.292vw] text-[1.25vw] bg-[#146D74] rounded-[0.26vw] text-white hover:bg-[#106167] active:bg-[#0F565B] transition ease-out-300"
+              disabled={isUploading}
             >
-              Save
+              {isUploading ? "Uploading..." : "Save"}
             </button>
             <button
               type="button"
