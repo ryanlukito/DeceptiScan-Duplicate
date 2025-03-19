@@ -14,7 +14,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 
 # Get the absolute path to the .env.development file
-base_dir = Path(__file__).resolve().parent
+base_dir = Path(__file__).resolve().parent #tes
 env_path = os.path.join(base_dir, '.env.development')
 
 # Load environment variables once
