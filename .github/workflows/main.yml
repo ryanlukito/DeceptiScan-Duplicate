@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - "backend/**" # ✅ Only trigger when changes happen in backend/
+      - "backend/**" # ✅ Only trigger when changes happen in backend/**
 
 jobs:
   sync:
