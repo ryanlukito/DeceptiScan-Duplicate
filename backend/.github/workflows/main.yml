@@ -1,12 +1,14 @@
-name: "Sync Submodules & Build Docker"
+name: "Sync Backend Submodules & Build Docker"
 
 on:
   push:
     branches: [main]
+    paths:
+      - "backend/**" # ✅ Only trigger when changes happen in backend/
 
 jobs:
   sync:
-    name: "Sync Submodules"
+    name: "Sync Backend Submodules"
     runs-on: ubuntu-latest
 
     defaults:
@@ -14,34 +16,41 @@ jobs:
         shell: bash
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout Repository (Backend Only)
         uses: actions/checkout@v2
         with:
           repository: ryanlukito/DeceptiScan-Duplicate
           token: ${{ secrets.CI_TOKEN }}
           submodules: true
+          sparse-checkout: |
+            backend/
 
       - name: Update Submodules
+        working-directory: backend # ✅ Only updates backend submodules
         run: |
           git submodule update --init --recursive
           git submodule update --recursive --remote
 
       - name: Commit Submodule Updates
+        working-directory: backend
         run: |
           git config user.email "bot@noreply.github.com"
           git config user.name "GitHub Actions - Submodule Sync"
           git add --all
-          git commit -m "Update submodules" || echo "No changes to commit"
+          git commit -m "Update backend submodules" || echo "No changes to commit"
           git push
 
   docker:
-    needs: sync # Runs after submodule sync
-    name: "Build & Push Docker Image"
+    needs: sync # Runs only if submodule sync succeeds
+    name: "Build & Push Backend Docker Image"
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout Repository
+      - name: Checkout Repository (Backend Only)
         uses: actions/checkout@v2
+        with:
+          sparse-checkout: |
+            backend/
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
@@ -55,8 +64,9 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build and Push Docker Image
+      - name: Build and Push Backend Docker Image
         uses: docker/build-push-action@v5
         with:
+          context: backend/ # ✅ Only build backend folder
           push: true
           tags: ryanlukito/deceptiscan-be:latest
