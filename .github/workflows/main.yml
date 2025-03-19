@@ -49,7 +49,7 @@ jobs:
 
   docker-backend:
     needs: sync
-    if: contains(github.event.head_commit.modified, 'backend/')
+    if: contains(github.event.pull_request.changed_files, 'backend/') || github.event_name == 'push'
     name: "Build & Push Backend Docker Image"
     runs-on: ubuntu-latest
 
